@@ -2,7 +2,7 @@
 
 Game::Game()
 {
-	//TODO m_input = new Input();
+	m_input = new Input();
 	m_paused = false;
 	m_graphics = NULL;
 	m_initialized = false;
@@ -19,7 +19,7 @@ void Game::initialize(HWND hwnd)
 	m_hwnd = hwnd;
 	m_graphics = new Graphics();
 	m_graphics->initialize(m_hwnd, GAME_WIDTH, GAME_HEIGHT, FULLSCREEN);
-	//TODO m_input->initialize(m_hwnd, false);
+	m_input->initialize(m_hwnd, false);
 
 	if (QueryPerformanceFrequency(&m_timeFreq) == false)
 	{
@@ -41,62 +41,62 @@ LRESULT Game::messageHandler(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 			return 0;
 
 		case WM_KEYDOWN: case WM_SYSKEYDOWN:
-			//TODO m_input->keyDown(wParam);
+			m_input->keyDown(wParam);
 			return 0;
 
 		case WM_KEYUP: case WM_SYSKEYUP:
-			//TODO m_input->keyUp(wParam);
+			m_input->keyUp(wParam);
 			return 0;
 
 		case WM_CHAR:
-			//TODO m_input->keyIn(wParam);
+			m_input->keyIn(wParam);
 			return 0;
 
 		case WM_MOUSEMOVE:
-			//TODO m_input->mouseIn(lParam);
+			m_input->mouseIn(lParam);
 			return 0;
 
 		case WM_INPUT:
-			//TODO m_input->mouseRawIn(lParam);
+			m_input->mouseRawIn(lParam);
 			return 0;
 
 		case WM_LBUTTONDOWN:
-			//TODO m_input->setMouseLButton(true);
-			//TODO m_input->mouseIn(lParam);
+			m_input->setMouseLButton(true);
+			m_input->mouseIn(lParam);
 			return 0;
 
 		case WM_LBUTTONUP:
-			//TODO m_input->setMouseLButton(false);
-			//TODO m_input->mouseIn(lParam);
+			m_input->setMouseLButton(false);
+			m_input->mouseIn(lParam);
 			return 0;
 
 		case WM_MBUTTONDOWN:
-			//TODO m_input->setMouseMButton(true);
-			//TODO m_input->mouseIn(lParam);
+			m_input->setMouseMButton(true);
+			m_input->mouseIn(lParam);
 			return 0;
 
 		case WM_MBUTTONUP:
-			//TODO m_input->setMouseMButton(false);
-			//TODO m_input->mouseIn(lParam);
+			m_input->setMouseMButton(false);
+			m_input->mouseIn(lParam);
 			return 0;
 
 		case WM_RBUTTONDOWN:
-			//TODO m_input->setMouseRButton(true);
-			//TODO m_input->mouseIn(lParam);
+			m_input->setMouseRButton(true);
+			m_input->mouseIn(lParam);
 			return 0;
 
 		case WM_RBUTTONUP:
-			//TODO m_input->setMouseRButton(true);
-			//TODO m_input->mouseIn(lParam);
+			m_input->setMouseRButton(true);
+			m_input->mouseIn(lParam);
 			return 0;
 
 		case WM_XBUTTONDOWN: case WM_NCXBUTTONUP:
-			//TODO m_input->setMouseXButton(wParam);
-			//TODO m_input->mouseIn(lParam);
+			m_input->setMouseXButton(wParam);
+			m_input->mouseIn(lParam);
 			return 0;
 
 		case WM_DEVICECHANGE:
-			//TODO m_input->checkControllers();
+			//m_input->checkControllers();
 			return 0;
 		}
 	}
@@ -164,7 +164,7 @@ void Game::run(HWND hwnd)
 		m_frameTime = MAX_FRAME_TIME;
 
 	m_timeStart = m_timeEnd;
-	//TODO m_input->readControllers();
+	//m_input->readControllers();
 
 	if (!m_paused)
 	{
@@ -172,9 +172,20 @@ void Game::run(HWND hwnd)
 		ai();
 		collisions();
 
-		//TODO m_input->vibrateControllers(m_frameTime);
+		//m_input->vibrateControllers(m_frameTime);
 	}
 
 	renderGame();
-	//TODO m_input->Clear(inputNS::KEYS_PRESSED);
+	m_input->clear(inputNS::KEYS_PRESSED);
+}
+
+void Game::releaseAll() {}
+void Game::resetAll() {}
+
+void Game::deleteAll()
+{
+	releaseAll();
+	safeDelete(m_graphics);
+	safeDelete(m_input);
+	m_initialized = false;
 }

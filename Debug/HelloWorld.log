@@ -1,19 +1,17 @@
-﻿Build started 27.08.2015 20:05:27.
-     1>Project "C:\Users\Solaris\Documents\Visual Studio 2013\Projects\HelloWorld\HelloWorld.vcxproj" on node 2 (Build target(s)).
+﻿Build started 03.09.2015 20:56:47.
+     1>Project "C:\Users\Solaris\Documents\Visual Studio 2013\Projects\Alterverse\trunk\HelloWorld.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MT /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Graphics.cpp winmain.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MT /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Graphics.cpp
          Graphics.cpp
-     1>c:\users\solaris\documents\visual studio 2013\projects\helloworld\graphics.cpp(78): warning C4018: '<' : signed/unsigned mismatch
-         Generating Code...
-         Compiling...
-         winmain.cpp
-         Generating Code...
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Solaris\Documents\Visual Studio 2013\Projects\HelloWorld\Debug\HelloWorld.exe" /INCREMENTAL /NOLOGO d3d9.lib d3dx9d.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Solaris\Documents\Visual Studio 2013\Projects\HelloWorld\Debug\HelloWorld.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Solaris\Documents\Visual Studio 2013\Projects\HelloWorld\Debug\HelloWorld.lib" /MACHINE:X86 Debug\Graphics.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Solaris\Documents\Visual Studio 2013\Projects\Alterverse\trunk\Debug\HelloWorld.exe" /INCREMENTAL /NOLOGO d3d9.lib d3dx9d.lib winmm.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Solaris\Documents\Visual Studio 2013\Projects\Alterverse\trunk\Debug\HelloWorld.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Solaris\Documents\Visual Studio 2013\Projects\Alterverse\trunk\Debug\HelloWorld.lib" /MACHINE:X86 Debug\Game.obj
+         Debug\Graphics.obj
+         Debug\Input.obj
+         Debug\Spacewar.obj
          Debug\winmain.obj
-         HelloWorld.vcxproj -> C:\Users\Solaris\Documents\Visual Studio 2013\Projects\HelloWorld\Debug\HelloWorld.exe
-     1>Done Building Project "C:\Users\Solaris\Documents\Visual Studio 2013\Projects\HelloWorld\HelloWorld.vcxproj" (Build target(s)).
+         HelloWorld.vcxproj -> C:\Users\Solaris\Documents\Visual Studio 2013\Projects\Alterverse\trunk\Debug\HelloWorld.exe
+     1>Done Building Project "C:\Users\Solaris\Documents\Visual Studio 2013\Projects\Alterverse\trunk\HelloWorld.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:04.75
+Time Elapsed 00:00:00.80

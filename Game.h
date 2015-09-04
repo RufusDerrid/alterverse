@@ -5,7 +5,7 @@
 #include <windows.h>
 #include <Mmsystem.h>
 #include "Graphics.h"
-//TODO #include "input.h"
+#include "input.h"
 #include "constants.h"
 #include "GameError.h"
 
@@ -13,7 +13,7 @@ class Game
 {
 protected:
 	Graphics *m_graphics;
-	//TODO Input *m_input;
+	Input *m_input;
 	HWND m_hwnd;
 	HRESULT m_hr;
 	LARGE_INTEGER m_timeStart;
@@ -37,7 +37,7 @@ public:
 	virtual void renderGame();
 	virtual void handleLostGraphicsDevice();
 	Graphics* getGraphics() { return m_graphics; }
-	//TODO Input* getInput() { return m_input; }
+	Input* getInput() { return m_input; }
 	void exitGame() { PostMessage(m_hwnd, WM_DESTROY, 0, 0); }
 
 	virtual void update() = 0;

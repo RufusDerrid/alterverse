@@ -1,10 +1,15 @@
-#include <iostream>
-#include <Winuser.h>
-#include <XInput.h>
-
 #ifndef _INPUT_H
 #define _INPUT_H
 #define WIN32_LEAN_AND_MEAN
+
+class Input;
+
+#include <windows.h>
+#include <WindowsX.h>
+#include <string>
+#include <XInput.h>
+#include "constants.h"
+#include "gameError.h"
 
 #ifndef HID_USAGE_PAGE_GENERIC
 #define HID_USAGE_PAGE_GENERIC ((USHORT) 0x01)
@@ -60,7 +65,7 @@ public:
 	virtual ~Input();
 
 	void initialize(HWND hwnd, bool capture);
-	bool checkControllers();
+	//bool checkControllers();
 	void keyDown(WPARAM wParam);
 	void keyUp(WPARAM wParam);
 	void keyIn(WPARAM wParam);
@@ -69,11 +74,35 @@ public:
 	bool anyKeyPressed() const;
 	void clearKeyPress(UCHAR vkey);
 	void clear(UCHAR what);
+	void mouseIn(LPARAM lParam);
+	void mouseRawIn(LPARAM lParam);
 
 	std::string getTextIn() { return m_textIn; }
 	char getChatIn() { return m_charIn; }
 	void clearTextIn() { m_textIn.clear(); }
 	void clearAll() { clear(inputNS::KEYS_MOUSE_TEXT); }
+
+	//mouse
+	void setMouseLButton(bool b) { m_mouseLButton = b; }
+	void setMouseMButton(bool b) { m_mouseMButton = b; }
+	void setMouseRButton(bool b) { m_mouseRButton = b; }
+
+	void setMouseXButton(WPARAM wParam)
+	{
+		m_mouseX1Button = (wParam & MK_XBUTTON1) ? true : false;
+		m_mouseX2Button = (wParam & MK_XBUTTON2) ? true : false;
+	}
+
+	int getMouseX() const { return m_mouseX; }
+	int getMouseY() const { return m_mouseY; }
+	int getMouseRawX() const { return m_mouseRawX; }
+	int getMouseRawY() const { return m_mouseRawY; }
+
+	bool getMouseLButton() const { return m_mouseLButton; }
+	bool getMouseMButton() const { return m_mouseMButton; }
+	bool getMouseRButton() const { return m_mouseRButton; }
+	bool getMouseX1Button() const { return m_mouseX1Button; }
+	bool getMouseX2Button() const { return m_mouseX2Button; }
 };
 
 #endif

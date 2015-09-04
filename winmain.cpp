@@ -1,12 +1,10 @@
 #define _CRTDBG_MAP_ALLOC
 #define WIN32_LEAN_AND_MEAN
 
-#include <windows.h>
+#include <Windows.h>
 #include <stdlib.h>
 #include <crtdbg.h>
-#include "Graphics.h"
-#include "Game.h"
-#include "constants.h"
+#include "Spacewar.h"
 
 //Function proto
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int);
@@ -15,13 +13,7 @@ LRESULT WINAPI WinProc(HWND, UINT, WPARAM, LPARAM);
 bool AnotherInstance();
 
 //Global vars
-HINSTANCE g_hinst;
-TCHAR g_ch = ' ';
-HDC g_hdc;
-RECT g_rect;
-PAINTSTRUCT g_ps;
-bool g_vkKeys[256];
-Game* g_game;
+Game* g_game = NULL;
 
 //Consts
 const char CLASS_NAME[] = "WinMain";
@@ -43,6 +35,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	if (AnotherInstance())
 		return 1;
+
+	g_game = new Spacewar;
 
 	if (!CreateMainWindow(hwnd, hInstance, nCmdShow))
 		return 1;
@@ -68,18 +62,23 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 			}
 		}
 
+		safeDelete(g_game);
 		return msg.wParam;
 	}
 	catch (const GameError &err)
 	{
+		g_game->deleteAll();
+		DestroyWindow(hwnd);
 		MessageBox(NULL, err.getMessage(), "Error", MB_OK);
 	}
 	catch (...)
 	{
+		g_game->deleteAll();
+		DestroyWindow(hwnd);
 		MessageBox(NULL, "Unknown error occured in game.", "Error", MB_OK);
 	}
 
-	SAFE_DELETE(g_graphics);
+	safeDelete(g_game);
 	return 0;
 }
 

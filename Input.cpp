@@ -45,7 +45,7 @@ void Input::initialize(HWND hwnd, bool mouseCaptured)
 			SetCapture(hwnd);
 
 		ZeroMemory(m_controllers, sizeof(ControllerState) * MAX_CONTROLLERS);
-		checkControllers();
+		//checkControllers();
 	}
 	catch (...)
 	{
@@ -137,9 +137,49 @@ void Input::clearKeyPress(UCHAR vkey)
 		m_keysPressed[vkey] = false;
 }
 
+void Input::mouseIn(LPARAM lParam)
+{
+	m_mouseX = GET_X_LPARAM(lParam);
+	m_mouseY = GET_Y_LPARAM(lParam);
+}
+
+void Input::mouseRawIn(LPARAM lParam)
+{
+	UINT dwSize = 40;
+	static BYTE lpb[40];
+	GetRawInputData((HRAWINPUT)lParam, RID_INPUT, lpb, &dwSize, sizeof(RAWINPUTHEADER));
+	RAWINPUT* raw = (RAWINPUT*)lpb;
+	if (raw->header.dwType == RIM_TYPEMOUSE)
+	{
+		m_mouseRawX = raw->data.mouse.lLastX;
+		m_mouseRawY = raw->data.mouse.lLastY;
+	}
+}
+
 void Input::clear(UCHAR what)
 {
+	if (what & inputNS::KEYS_DOWN)
+	{
+		for (int i = 0; i < inputNS::KEYS_ARRAY_LEN; i++)
+			m_keysDown[i] = false;
+	}
 
+	if (what & inputNS::KEYS_PRESSED)
+	{
+		for (int i = 0; i < inputNS::KEYS_ARRAY_LEN; i++)
+			m_keysPressed[i] = false;
+	}
+
+	if (what & inputNS::MOUSE)
+	{
+		m_mouseX = 0;
+		m_mouseY = 0;
+		m_mouseRawX = 0;
+		m_mouseRawY = 0;
+	}
+
+	if (what * inputNS::TEXT_IN)
+		clearTextIn();
 }
 
 Input::~Input()
