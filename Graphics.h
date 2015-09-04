@@ -16,9 +16,10 @@
 #define LP_SPRITE LPD3DXSPRITE
 #define LP_TEXTURE LPDIRECT3DTEXTURE9
 
-#define COLOR_ARGB DWORD
-#define SETCOLOR_ARGB(a,r,g,b) \
-	((COLOR_ARGB)((((a)&0xff)<<24) | (((r)&0xff)<<16) | (((g)&0xff)<<8) | ((b)&0xff)))
+namespace graphicsNS
+{
+	const COLOR_ARGB WHITE = D3DCOLOR_ARGB(255, 255, 255, 255);
+}
 
 struct SpriteData
 {

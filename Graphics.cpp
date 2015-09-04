@@ -151,6 +151,28 @@ void Graphics::drawSprite(const SpriteData &spriteData, COLOR_ARGB color)
 
 	D3DXVECTOR2 translate = D3DXVECTOR2((float)spriteData.x,
 		(float)spriteData.y);
+
+	D3DXVECTOR2 scaling(spriteData.scale, spriteData.scale);
+
+	if (spriteData.flipHorizontal)
+	{
+		scaling.x *= -1;
+		spriteCenter.x -= (float)(spriteData.width*spriteData.scale);
+		translate.x += (float)(spriteData.width*spriteData.scale);
+	}
+
+	if (spriteData.flipVertical)
+	{
+		scaling.y *= -1;
+		spriteCenter.y -= (float)(spriteData.height*spriteData.scale);
+		translate.y -= (float)(spriteData.height*spriteData.scale);
+	}
+
+	D3DXMATRIX matrix;
+	D3DXMatrixTransformation2D(&matrix, NULL, 0.0f, &scaling, &spriteCenter, (float)spriteData.angle, &translate);
+
+	m_sprite->SetTransform(&matrix);
+	m_sprite->Draw(spriteData.texture, &spriteData.rect, NULL, NULL, color);
 }
 
 HRESULT Graphics::beginScene()
